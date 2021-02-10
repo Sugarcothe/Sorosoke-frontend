@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {signup} from '../auth/index'
 
-export class Signup extends Component {
+class Signup extends Component {
   constructor() {
-    super();
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-      error: "",
-      open: false,
-      loading: false,
-    }
+      super();
+      this.state = {
+          name: "",
+          email: "",
+          password: "",
+          error: "",
+          open: false,
+          
+      };
   }
 
   handleChange = name => event => {
     this.setState({ error: "" });
-    this.setState({[name]: event.target.value});
-  };
+    this.setState({ [name]: event.target.value });
+};
 
 
   clickSubmit = event => {
-    event.preventDefault()
-    this.setState({loading: true})
+    event.preventDefault();
+    // this.setState({loading: true})
     const { name, email, password } = this.state;
     const user = {
       name,
@@ -98,9 +98,9 @@ export class Signup extends Component {
         {loading ?  < div className ="jumbotron text-xenter">
           <h2>loading...</h2>
           </div> : ""}
-
+  
         <div 
-        className="alert alert-info" 
+        className="alert alert-success" 
         style={{ display: open ? "" : "none"}}>
 
          New Account is successfuly created, Please Sign in

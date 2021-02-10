@@ -1,51 +1,50 @@
 export const signup = user => {
-
-  return fetch("http://localhost:8080/api/signup", {
-    method: 'POST',
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    }, 
-    body: JSON.stringify(user)
-  })
-
-    .then(response => {
-      return response.json();
+   
+    return fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
     })
-    .catch(err => console.log(err));
-
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
 };
+
 
 export const signin = user => {
-
-  return fetch("http://localhost:8080/api/signin", {
-    method: 'POST',
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    }, 
-    body: JSON.stringify(user)
+  return fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
   })
-
-    .then(response => {
-      return response.json();
-    })
-    .catch(err => console.log(err));
+      .then(response => {
+          return response.json();
+      })
+      .catch(err => console.log(err));
 };
 
-export const authenticate = ( jwt, next ) => {
-  if(typeof window !== "undefined") {
-    localStorage.getItem("jwt", JSON.stringify(jwt))
-    next()
-  }
+
+export const authenticate = (jwt, next) => {
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('jwt', JSON.stringify(jwt));
+        next();
+    }
 };
 
 export const signout = next => {
   if(typeof window !== "undefined") localStorage.removeItem('jwt')
-  next()
-  return fetch("http://localhost:8080/signout", {
+  next();
+  return fetch(`${process.env.REACT_APP_API_URL}/signout`, {
     method: 'GET'
   })
+
   .then(response => {
     console.log('signout', response)
     return response.json()
@@ -54,13 +53,13 @@ export const signout = next => {
 };
 
 export const isAuthenticated = () => {
-  if (typeof window === "undefined") {
-    return false;
+  if (typeof window == 'undefined') {
+      return false;
   }
 
-  if(localStorage.getItem('jwt')) {
-    return JSON.parse(localStorage.getItem('jwt'))
+  if (localStorage.getItem('jwt')) {
+      return JSON.parse(localStorage.getItem('jwt'));
   } else {
-    return false
+      return false;
   }
-}
+};

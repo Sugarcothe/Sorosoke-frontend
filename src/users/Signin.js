@@ -4,34 +4,33 @@ import { signin, authenticate } from "../auth/index"
 
 class Signin extends Component {
   constructor() {
-    super()
-    this.state = {
-      email: "",
-      password: "",
-      error: "",
-      redirectToReferer: false,
-      loading: false
-    }
+      super();
+      this.state = {
+          email: "",
+          password: "",
+          error: "",
+          redirectToReferer: false,
+          loading: false,
+          
+      };
   }
 
   handleChange = name => event => {
-    this.setState({ error: "" });
-    this.setState({[name]: event.target.value});
+      this.setState({ error: "" });
+      this.setState({ [name]: event.target.value });
   };
 
   
-
-
   clickSubmit = event => {
-    event.preventDefault()
-    this.setState({ loading: true })
-    const {  email, password } = this.state;
+    event.preventDefault();
+    this.setState({ loading: true });
+    const { email, password } = this.state;
     const user = {
-      email,
-      password
+        email,
+        password
     };
 
-    console.log(user);
+    // console.log(user);
    signin(user).then(data => {
      if (data.error) {
       this.setState({error: data.error, loading: false})
