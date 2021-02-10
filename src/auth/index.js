@@ -40,7 +40,7 @@ export const authenticate = ( jwt, next ) => {
   }
 };
 
-export const signout = (next) => {
+export const signout = next => {
   if(typeof window !== "undefined") localStorage.removeItem('jwt')
   next()
   return fetch("http://localhost:8080/signout", {
@@ -55,7 +55,7 @@ export const signout = (next) => {
 
 export const isAuthenticated = () => {
   if (typeof window === "undefined") {
-    return false
+    return false;
   }
 
   if(localStorage.getItem('jwt')) {
