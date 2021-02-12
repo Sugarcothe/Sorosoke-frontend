@@ -69,7 +69,7 @@ const Menu = ({ history }) => (
         style={isActive(history, `/user/${isAuthenticated().user._id}`)}
         className="nav-link"
     >
-        {`${isAuthenticated().user.name}'s profile`}
+        {`${isAuthenticated().user.name}`}
         </Link>
     </li>
 

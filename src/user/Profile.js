@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {isAuthenticated} from "../auth";
 import { Redirect, Link } from "react-router-dom";
 import { read } from './apiUser';
-import avatar from '../images/ava.png';
+import avatar from '../images/avatar.jpg';
 import DeleteUser from './DeleteUser';
+
 
 class Profile extends Component {
   constructor() {
@@ -45,29 +46,41 @@ componentWillReceiveProps(props) {
     if(redirectToSignin) 
     return <Redirect to="/signin" />
 
+    const photoUrl = user._id
+    ? `${process.env.REACT_APP_API_URL}/user/photo/${
+        user._id
+      }?${new Date().getTime()}`
+    : avatar;
 
+
+      
     return (
       <div className="container">
-        <h2 className="mt-5 mb-5">{user.name}'s Profile</h2>
+        <h2 className="mt-5 mb-2">{user.name}</h2>
         <div className="row">
-        <div className="col-md-6">
+          <div className="col-md-6">
 
-            <img 
-              className="card-img-top" 
-              src={avatar} 
+          <img
+              style={{ height: "200px", width: "auto" }}
+              className="img-thumbnail"
+              src={photoUrl}
+              onError={i => (i.target.src = `${avatar}`)}
               alt={user.name}
-              style={{width: '100%', hight: "10vh", objectFit: "cover"}}
-              />
-
-
-            
-
-        </div>
-        
-        <div className="col-md-6">
+            />
+              
+              <div className="row">
+                <div className="col md-12 mt-2 mb-5">
+                  <hr/>
+                  <p className="lead">{user.about}</p>
+                  <hr/>
+                </div>
+              </div>
+          </div>
+          
+          <div className="col-md-6">
 
             <div className="lead mt-5 m-2">
-              <p>Hello from {user.name}</p>
+              <p>Name: {user.name}</p>
               <p>Email: {user.email}</p>
               <p>{`Joined ${new Date(user.created).toDateString()}`}</p>
             </div>
