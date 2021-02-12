@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {signup} from '../auth/index'
+import {signup} from '../auth/index';
+import {Link } from 'react-router-dom';
 
 class Signup extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class Signup extends Component {
     <form>
 
           <div className="form-group">
-            <label className="text-muted">Name</label>
+            <label className="text-muted">Username</label>
             <input 
             onChange={this.handleChange('name')} 
             type="text" 
@@ -103,7 +104,7 @@ class Signup extends Component {
         className="alert alert-success" 
         style={{ display: open ? "" : "none"}}>
 
-         New Account is successfuly created, Please Sign in
+         New Account is successfuly created, Please <Link to="/signin">Sign in</Link>
           
         </div>
 
