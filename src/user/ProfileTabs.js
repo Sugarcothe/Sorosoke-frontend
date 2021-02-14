@@ -4,11 +4,14 @@ import avatar from '../images/avatar.jpg';
 
 class ProfileTabs extends Component {
   render() {
-      const { following, followers, posts } = this.props;
+      const { following, followers, posts} = this.props;
       return (
           <div>
-              <div className="row">
-                  <div style={{fontWeight: 'bold'}} className="col-md-4">
+              <hr/>
+              <div className="row mt-4">
+                  
+                  <div style={{fontWeight: 'bold'}} 
+                  className="col-md-4 ">
                       <h5 className="text-primary">
                           {followers.length} Vibers
                       </h5>
@@ -44,7 +47,8 @@ class ProfileTabs extends Component {
                       ))}
                   </div>
 
-                  <div className="col-md-4">
+                  <div className="col-md-4 mt-4">
+                      <hr/>
                       <h5 style={{fontWeight: 'bold'}} className="text-primary">
                           {following.length} Vibes
                       </h5>
@@ -80,8 +84,23 @@ class ProfileTabs extends Component {
                       ))}
                   </div>
 
-                  <div className="col-md-4">
-                      <h4 style={{fontWeight: 'bold'}} className="text-primary">Posts</h4> 
+                  <div className="col-md-4 pt-4">
+                      <hr/>
+                      <h5 style={{fontWeight: 'bold'}} className="text-primary">Posts</h5> 
+                      <hr/>
+                      {posts.map((post, i) => (
+                          <div key={i}>
+                              <div>
+                                  <Link to={`/post/${post._id}`}>
+                                      <div>
+                                          <p className="lead">
+                                              {post.body}
+                                          </p>
+                                      </div>
+                                  </Link>
+                              </div>
+                          </div>
+                      ))}
                   </div>
               </div>
           </div>

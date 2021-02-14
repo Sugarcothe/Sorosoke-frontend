@@ -5,7 +5,8 @@ import { read } from './apiUser';
 import avatar from '../images/avatar.jpg';
 import DeleteUser from './DeleteUser';
 import FollowProfileButton from './FollowProfileButton';
-import ProfileTabs from './ProfileTabs'
+import ProfileTabs from './ProfileTabs';
+import {listByUser} from '../post/apiPost'
 
 
 class Profile extends Component {
@@ -15,7 +16,8 @@ class Profile extends Component {
       user: {following: [], followers: []},
       redirectToSignin: false,
       following: false,
-      error: ""
+      error: "",
+      posts: []
     };
   }
 
@@ -52,10 +54,23 @@ class Profile extends Component {
         this.setState({redirectToSignin: true})
       } else {
         let following = this.checkFollow(data)
-        this.setState({user: data, following})
+        this.setState({user: data, following});
+        this.loadPosts(data._id)
       }
     });
   };
+
+  loadPosts = userId => {
+    const token = isAuthenticated().token;
+    listByUser(userId, token).then(data => {
+      if(data.error) {
+        console.log(data.error)
+      } else {
+        this.setState({posts: data})
+      }
+    })
+
+  }
 
 componentDidMount() {
   const userId = this.props.match.params.userId;
@@ -70,7 +85,7 @@ componentWillReceiveProps(props) {
 
 
   render() {
-    const {redirectToSignin, user} = this.state
+    const {redirectToSignin, user, posts} = this.state
     if(redirectToSignin) 
     return <Redirect to="/signin" />
 
@@ -106,6 +121,13 @@ componentWillReceiveProps(props) {
           {isAuthenticated().user &&
           isAuthenticated().user._id === user._id ? (
             <div className="d-inline-block">
+
+              <Link
+                className="btn btn-raised btn-info mr-5"
+                to={`/post/create`}
+              >
+                Create Post
+              </Link>
               
               <Link
                 className="btn btn-raised btn-success mr-5"
@@ -154,6 +176,7 @@ componentWillReceiveProps(props) {
           <ProfileTabs
             followers={user.followers}
             following={user.following}
+            posts={posts}
           />
         </div>
       </div>

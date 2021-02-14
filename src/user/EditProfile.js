@@ -49,8 +49,8 @@ export class EditProfile extends Component {
   isValid = () => {
     const {name, email, password, fileSize} = this.state
 
-    if(fileSize > 100000) {
-      this.setState({error: 'Filesize should be less than 1mb'})
+    if(fileSize > 200000) {
+      this.setState({error: 'Filesize should be less than 2mb'})
       return false
     }
 
@@ -60,7 +60,7 @@ export class EditProfile extends Component {
     }
 
     if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      this.setState({error: 'A valid is required'})
+      this.setState({error: 'A valid is required', loading: false})
       return false
     }
 
