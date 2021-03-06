@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { list } from "./apiPost";
-import avalon from "../images/images.jpg";
+import avalon from "../images/avalon.webp";
 import { Link } from "react-router-dom";
 
 class Post extends Component {
@@ -65,7 +65,7 @@ renderPost = post => {
         const { post } = this.state;
         return (
             <div className="container">
-                <h2 className="mt-5 mb-5">Recent Posts</h2>
+                <h4 className="mt-5 mb-5">Recent Posts</h4>
 
                 {this.renderPost(post)}
             </div>

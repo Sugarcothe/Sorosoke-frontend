@@ -12,8 +12,8 @@ const Menu = ({ history }) => (
 <div>
   <ul className="nav nav-tabs bg-primary">
     <li className="nav-item">
-        <Link className="nav-link" style={isActive(history, '/')} to="/">
-            Home
+        <Link className="nav-link bg-warning" style={isActive(history, '/')} to="/">
+          <h5>Vibers</h5> 
         </Link>
     </li>
 

@@ -2,10 +2,10 @@ import React from 'react';
 import Posts from '../post/Posts'
 
 const Home = () => (
-  <div className="container fluid">
+  <div className="fluid">
     <div className="jumbotron">
-    <h2 className="Home">Home</h2>
-    <p className="className">Welcome to React Frontend</p>
+    <h2 className="Home">Vibers</h2>
+    <p className="lead className"> Vibe with the community! </p>
   </div>
 
   <div className="container">
